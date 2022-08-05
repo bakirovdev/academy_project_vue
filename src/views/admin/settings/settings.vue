@@ -6,7 +6,7 @@
             <v-tab to="/admin/settings/time"><span class="white--text">Time</span></v-tab>
             </v-tabs>
         </div>
-        <router-view></router-view>
+        <router-view class="mt-15"></router-view>
     </v-container>
 </template>
 <script>

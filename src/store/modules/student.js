@@ -1,12 +1,16 @@
 import axios from "@/axios"
 
 const state = () => ({
-    student_data: [],
+    student_data: {
+        data: [],
+        meta: {},
+    },
     params: {}
 })
 
 const getters = {
     getStudents: state=>state.student_data,
+    getTotalStudent:  state=>state.student_data.meta&&state.student_data.meta.last_page || 1
 }
 const actions = {
     async fetchStudents({commit}, params) {
@@ -16,7 +20,7 @@ const actions = {
                     ...params
                 }
             })
-            commit('SET_STUDENT_DATA', {students})
+            commit('SET_STUDENT_DATA', {students_data: students.data, params})
             Promise.resolve(students)
         } catch (error) {
             Promise.reject(error)
@@ -43,8 +47,9 @@ const actions = {
 }
 
 const mutations = {
-    SET_STUDENT_DATA: (state, { students })=>{
-        state.student_data = students.data
+    SET_STUDENT_DATA: (state, { students_data, params })=>{
+        state.student_data = students_data
+        state.params = params
     }
 }
 

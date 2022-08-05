@@ -12,7 +12,7 @@
         </button>
       </div>
     </div>
-    <v-container fluid>
+    <v-container fluid class="mt-15">
       <v-card>
         <v-card-text>
           <v-row no-gutters>
@@ -35,7 +35,9 @@
       <v-data-table
         :headers="header"
         :items="groups"
+        :disable-pagination="true" 
         hide-default-footer
+        
       >
          <template #item.actions="{ item }">
           <div class="d-flex aligin-center justify-start">
@@ -68,6 +70,14 @@
               @click="groupStudents(item)"
             >
               <v-icon size="2rem">mdi-account-multiple-check</v-icon>
+            </v-btn>
+            <v-btn
+              icon
+              class="pa-0 mx-2"
+              color="green"
+              @click="groupStudents(item)"
+            >
+              <v-icon size="2rem">mdi-account-tie</v-icon>
             </v-btn>
           </div>
         </template>
@@ -168,7 +178,6 @@ export default {
     },
     groupStudents(item){
       this.$refs.group_student.show(item)
-      console.log(item)
     }
   }
 };

@@ -2,12 +2,14 @@ import axios from "@/axios";
 
 const state = () =>({
     group_data:[],
-    group_lesson_time:[]
+    group_lesson_time:[],
+    group_students:[]
 })
 
 const getters = {
     getGroups: state =>state.group_data,
-    getGroupLessonTime: state => state.group_lesson_time
+    getGroupLessonTime: state => state.group_lesson_time,
+    getGroupStudent: state => state.group_students
 }
 
 const actions = {
@@ -58,8 +60,7 @@ const actions = {
         } catch (error) {
             return Promise.reject(error)
         }
-    }
-
+    },
 }
 
 const mutations = {
@@ -68,6 +69,9 @@ const mutations = {
     },
     SET_GROUP_LESSON_TIME:(state, response) => {
         state.group_lesson_time = response.data.data
+    },
+    SET_GROUP_STUDENTS: (state, response) => {
+        state.group_students = response.data
     }
 }
 

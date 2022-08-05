@@ -16,6 +16,9 @@
     --info: #20dad8;
     --autocomplate-width: 200px;
 }
+.bg-header{
+    background-color: var(--dark-blue) !important;
+}
 .Vue-Toastification__toast-body {
     align-items: center;
     width: 100%;
@@ -39,24 +42,31 @@ aside{
     padding: 20px 20px !important ;
 }
 .navbar{
+    z-index: 11;
+    position: fixed;
     color: whitesmoke;
     width: 100%;
     padding: 11px 25px !important;
+    top: 0;
     background-color: var(--dark-blue);
     border-bottom: 3px solid var(--gold-dark);
 }
 .navbar .nav-span{
     font-weight: 400;
+    display: inline;
     font-family: sans-serif;
     font-size: x-large;
 }
 .navbar .nav-action{
-    float: right;
+    top: 10px;
+    position: fixed;
+    right: 10px;
 }
 .add-btn{
     color: var(--dark-blue);
     background-color: var(--dark-green);
     padding: 5px 20px !important;
+    font-size: 16px;
     border-radius: 10px;
 }
 .add-btn:hover{
@@ -119,7 +129,9 @@ aside{
 }
 .action-btn{
     opacity: 0.5;
-    border-radius: 60%;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
     padding: 5px !important;
     margin: 2px !important;
 }
@@ -171,9 +183,23 @@ aside{
 }
 
 /* navbar tab */
-.navbar .tabs{
-    background-color: black !important;
+.navbar .v-tabs{
+    z-index: 1111111;
+    
+}
+.navbar .v-tab{
+    right: 210px;
 }
 .action-div{
     text-align: end;
+}
+.pagination1{
+    z-index: 11;
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    right: 50%;
+}
+ .v-pagination i{
+    color: var(--gold-dark) !important;
 }

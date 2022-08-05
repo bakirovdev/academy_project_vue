@@ -6,6 +6,8 @@ import course from './modules/course'
 import time from './modules/time'
 import region from './modules/region'
 import group from './modules/group'
+import group_students from './modules/group_student'
+import users from './modules/users'
 
 Vue.use(Vuex)
 const state = () => ({
@@ -22,11 +24,13 @@ export default new Vuex.Store({
   getters,
   mutations,
   modules: {
+    users,
     student,
     login,
     course,
     time,
     region,
-    group
+    group,
+    group_students,
   }
 })

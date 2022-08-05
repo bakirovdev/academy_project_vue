@@ -40,10 +40,11 @@ export default {
       drawer: true,
       items: [
         { id:0, title: "Home", icon: "mdi-home", to: "/admin"},
-        { id:1, title: "Students", icon: "mdi-account-group", to: "/admin/students"},
-        { id:2, title: "Groups", icon: "mdi-layers-triple", to: "/admin/groups"},
-        { id:3, title: "Setting", icon: "mdi-cog", to: "/admin/settings/"},
-        { id:4, title: "Logout", icon: "mdi-logout",to: "/login"}
+        { id:1, title: "Users", icon: "mdi-account-key", to: "/admin/users"},
+        { id:2, title: "Students", icon: "mdi-account-group", to: "/admin/students"},
+        { id:3, title: "Groups", icon: "mdi-layers-triple", to: "/admin/groups"},
+        { id:4, title: "Setting", icon: "mdi-cog", to: "/admin/settings/"},
+        { id:5, title: "Logout", icon: "mdi-logout",to: "/login"}
       ],
       mini: true,
     };

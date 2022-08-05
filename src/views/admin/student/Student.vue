@@ -12,7 +12,7 @@
         </button>
       </div>
     </div>
-    <v-container class="main-container" fluid>
+    <v-container class="main-container mt-15" fluid>
       <div class="filter-div">
         <div class="filter my-3">
           <v-text-field
@@ -78,7 +78,7 @@
         <div class="date-table">
           <v-data-table
             :headers="headers"
-            :items="students"
+            :items="students.data"
             :loading="loading"
             hide-default-footer
           >
@@ -124,6 +124,17 @@
       </div>
       <CreateUpdateStudent ref="create_update_student" />
     </v-container>
+    <div class="pagination1">
+      <v-row justify="center" align="center">
+          <v-pagination
+          class="pagination-all"
+          color="#0e3f62"
+          :length="totalStudents"
+          :total-visible="7"
+          v-model="options.page"
+          />
+      </v-row>
+    </div>
   </v-container>
 </template>
 <script>
@@ -139,10 +150,6 @@ export default {
         { title: "Confirmed", key: "confirmed" },
         { title: "Canceled", key: "canceled" },
       ],
-      pagination: {
-        skip: 1,
-        take: 20,
-      },
       loading: true,
       menu: false,
       dates: [],
@@ -160,6 +167,9 @@ export default {
         { text: "Status", value: "status", class: "table-item" },
         { text: "Actions", value: "actions" },
       ],
+      options:{
+        page: 1
+      }
     };
   },
   mounted() {
@@ -168,35 +178,37 @@ export default {
   computed: {
     ...mapGetters({
       students: "student/getStudents",
+      totalStudents: 'student/getTotalStudent'
     }),
     dateRangeText() {
       return this.dates.join(" ~ ");
     },
   },
-
+  watch:{
+    "options.page": {handler: "init"}
+  },
   async created() {
     await this.init();
   },
   methods: {
     async init() {
       this.loading = true;
-      await this.$store.dispatch("student/fetchStudents");
+      let dates = []
+      console.log(this.dates);
+      if (this.dates[1]) {
+        let checkDate = this.dateSort(this.dates[0], this.date[1]);
+        console.log(checkDate);
+        if (checkDate < 0) {
+          dates[0] = this.dates[1]
+          dates[1] = this.dates[0]
+        }
+      }
+      console.log(dates);
+      await this.$store.dispatch("student/fetchStudents", {status:this.status, dates, search: this.search, page: this.options.page});
       this.loading = false;
     },
     async getStudents(pagination = 0) {
-      if (pagination == "next") {
-        this.pagination.skip += this.pagination.take;
-      } else if (pagination == "previous") {
-        this.pagination.skip -= this.pagination.take;
-      }
-      let params = {
-        search: this.search,
-        status: this.status,
-        dates: this.dates,
-        skip: this.pagination.skip,
-        take: this.pagination.take,
-      };
-      await this.$store.dispatch("student/fetchStudents", params);
+      await this.init();
     },
     createStudent() {
       this.$refs.create_update_student.show();
@@ -217,6 +229,10 @@ export default {
       };
       this.$refs.create_update_student.show(student);
     },
+    dateSort (date1, date2){
+      console.log('hello world ');
+      return new Date(date1) - new Date(date2);
+    }
   },
 };
 </script>

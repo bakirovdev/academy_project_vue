@@ -174,25 +174,25 @@ export default {
         async init(){
             await this.$store.dispatch("region/fetchActiveRegions");
         },
-            async saveStudent(){
-                try {
-                    if (this.editing_student.id) {
-                        await this.$store.dispatch('student/updateStudent', this.editing_student);
-                    }else{
-                        await this.$store.dispatch('student/createStudent', this.editing_student);
-                        this.$toast.success('The student has created')
-                    }    
-                } catch (error) {
-                    this.$toast.error(error.message || 'error')
-                } finally{
-                    this.closeDialog()
-                }
-                
-            },
-            closeDialog(){
-                this.editing_student = {...this.default_student}
-                this.dialog = false
+        async saveStudent(){
+            try {
+                if (this.editing_student.id) {
+                    await this.$store.dispatch('student/updateStudent', this.editing_student);
+                }else{
+                    await this.$store.dispatch('student/createStudent', this.editing_student);
+                    this.$toast.success('The student has created')
+                }    
+            } catch (error) {
+                this.$toast.error(error.message || 'error')
+            } finally{
+                this.closeDialog()
             }
+            
+        },
+        closeDialog(){
+            this.editing_student = {...this.default_student}
+            this.dialog = false
+        }
     }
 }
 </script>
