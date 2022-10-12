@@ -35,6 +35,15 @@ const actions = {
         } catch (error) {
             return Promise.reject(error)
         }
+    },
+    async updateActive({ dispatch }, id) {
+        try {
+            const times = await axios.patch(`/times/update_active/${id}`);
+            await dispatch('fetchTimes')
+            return Promise.resolve(times)
+        } catch (error) {
+            return Promise.reject(error)
+        }
     }
 }
 

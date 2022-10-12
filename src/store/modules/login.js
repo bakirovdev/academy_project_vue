@@ -11,7 +11,7 @@ const actions = {
     async signIn({ commit }, body) {
         body.client_secret = process.env.VUE_APP_CLIENT_SECRET;
         try {
-            const response = await axios.post('/auth', body)
+            const response = await axios.post('/login', body)
             commit('SET_TOKEN', response.data);
             return Promise.resolve()
         } catch (error) {

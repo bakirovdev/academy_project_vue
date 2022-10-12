@@ -8,6 +8,7 @@ import region from './modules/region'
 import group from './modules/group'
 import group_students from './modules/group_student'
 import users from './modules/users'
+import lessons from './modules/lessons'
 
 Vue.use(Vuex)
 const state = () => ({
@@ -32,5 +33,6 @@ export default new Vuex.Store({
     region,
     group,
     group_students,
+    lessons
   }
 })

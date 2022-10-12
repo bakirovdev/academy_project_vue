@@ -54,6 +54,23 @@ const routes = [
         component: lazyLoad('admin/group/Group')
       },
       {
+        path: '/admin/lessons/:group_id',
+        name: "Lesson",
+        props: true,
+        component: lazyLoad('admin/lesson/Lesson')
+      },
+      {
+        path: '/admin/attendance/:group_id/:lesson_id',
+        name: "Attendance",
+        props: true,
+        component: lazyLoad('admin/lesson/Attendance')
+      },
+      {
+        path: '/admin/lesson/group',
+        name: 'UserGroup',
+        component: lazyLoad('admin/lesson/Group')
+      },
+      {
         path: '/admin/settings',
         component: lazyLoad('admin/settings/settings'),
         children: [

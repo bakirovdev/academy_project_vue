@@ -29,6 +29,10 @@
 .Vue-Toastification__toast{
     padding: 10px !important;
 }
+.main-div{
+    max-height: 100vh;
+    overflow-y: auto;
+}
 body{
     max-height: 100vh !important;
 }
@@ -68,12 +72,14 @@ aside{
     padding: 5px 20px !important;
     font-size: 16px;
     border-radius: 10px;
+    border: 1px solid var(--gold-dark);
 }
 .add-btn:hover{
     color: var(--white);
     background-color: var(--green);
     padding: 5px 20px !important;
     border-radius: 10px;
+    border: 1px solid var(--sky);
 }
 .add-btn:hover i{
     color: var(--gold-dark) !important;
@@ -202,4 +208,10 @@ aside{
 }
  .v-pagination i{
     color: var(--gold-dark) !important;
+}
+.filter-group {
+    display: flex;
+}
+.block_h{
+    display: inline-block;
 }

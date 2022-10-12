@@ -79,7 +79,7 @@
                 </v-autocomplete>
                 <v-autocomplete
                     class="mt-3"
-                    v-model="editing_student.gender_id"
+                    v-model="editing_student.gender"
                     :items="gender"
                     hide-details
                     single-line
@@ -88,7 +88,7 @@
                     item-text="title"
                     dense
                     solo
-                    item-value="id"
+                    item-value="key"
                     color="blue-grey lighten-2"
                 >
                     <template #item="data">
@@ -137,11 +137,13 @@ export default {
             gender: [
                 {
                     id: 1,
-                    title:"Male"
+                    title:"Male",
+                    key:"male"
                 },
                 {
                     id: 2,
-                    title:"Female"
+                    title: "Female",
+                    key:"female"
                 }
             ]
         }
@@ -177,15 +179,14 @@ export default {
         async saveStudent(){
             try {
                 if (this.editing_student.id) {
-                    await this.$store.dispatch('student/updateStudent', this.editing_student);
+                    await this.$store.dispatch('student/updateStudent', this.editiphpng_student);
                 }else{
                     await this.$store.dispatch('student/createStudent', this.editing_student);
                     this.$toast.success('The student has created')
-                }    
+                }
+                this.closeDialog()
             } catch (error) {
                 this.$toast.error(error.message || 'error')
-            } finally{
-                this.closeDialog()
             }
             
         },

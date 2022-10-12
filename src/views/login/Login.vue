@@ -11,7 +11,7 @@
     <div class="login-div d-flex justify-center aligin-center flex-column">
       <h3>This is a Login page</h3>
       <v-divider></v-divider>
-      <input v-model="signIn.login" placeholder="Username" />
+      <input v-model="signIn.username" placeholder="Username" />
       <input
         v-model="signIn.password"
         placeholder="Password"
@@ -21,7 +21,7 @@
       <v-spacer></v-spacer>
       <v-btn
         class="login-button success"
-        :disabled="signIn.login.length < 1 || signIn.password.length < 1"
+        :disabled="signIn.username.length < 1 || signIn.password.length < 1"
         @click="login()"
       >
         login
@@ -36,7 +36,7 @@ export default {
     return {
       show: false,
       signIn: {
-        login: "",
+        username: "",
         password: "",
       },
       snackbar: {

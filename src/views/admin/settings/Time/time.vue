@@ -23,7 +23,7 @@
                   <v-switch
                     class="py-0 my-2"
                     hide-details
-                    @click="updateActive(item.id)"
+                    @click="updateActive(item)"
                     v-model="item.active"
                   ></v-switch>
                   <v-btn
@@ -92,7 +92,7 @@ export default {
           "time/updateActive",
           item.id
         );
-        this.$toast.success(response.message);
+        this.$toast.success(response.data.message);
       } catch (error) {
         this.$toast.error("Something is wrong. Please try again.");
       } finally {

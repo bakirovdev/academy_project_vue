@@ -61,6 +61,10 @@ const mutations = {
         state.students = response.data
     },
     SET_UN_JOINED_STUDENT: (state, response) => {
+        response.data.map((element) => {
+            element.comment = ''
+            element.attend = 0
+        })
         state.unJoinedStudents = response.data
     }
 }

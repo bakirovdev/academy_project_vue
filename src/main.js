@@ -5,6 +5,9 @@ import store from './store'
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";import vuetify from './plugins/vuetify'
 import VueMask from 'v-mask'
+import VueApexCharts from 'vue-apexcharts'
+
+
 
 const options = {
   position: "top-right",
@@ -26,8 +29,10 @@ const options = {
 };
 
 Vue.use(Toast, options);
+Vue.use(VueApexCharts)
 Vue.config.productionTip = false
 Vue.use(VueMask);
+Vue.component('apexchart', VueApexCharts)
 
 Vue.prototype.$overlay = (value) => {
   store.commit("SET_OVERLAY", value)

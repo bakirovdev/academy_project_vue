@@ -43,6 +43,17 @@ const actions = {
         } catch (error) {
             return Promise.reject(error);
         }
+    },
+    async checkUser({}, body){
+        console.log(body);
+        try {
+            const response = await axios.put(`/students/update_status/${body.id}`, {
+                status:  body.status
+            })
+            return Promise.resolve(response)
+        } catch (error) {
+            return Promise.reject(error);
+        }
     }
 }
 

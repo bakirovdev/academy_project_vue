@@ -91,12 +91,12 @@
                 >
                   <v-icon color="orange accent-4" small>mdi-pencil</v-icon>
                 </button>
-                <button class="action-btn green darken-2" icon>
+                <button class="action-btn green darken-2" :disabled="item.status == ('confirmed'|| 'canceled')" icon @click="checkStudent(item.id, 'confirmed')">
                   <v-icon color="white accent-4" small
                     >mdi-account-check</v-icon
                   >
                 </button>
-                <button class="action-btn red accent-1" icon>
+                <button class="action-btn red accent-1" :disabled="item.status == ('confirmed'|| 'canceled')" icon @click="checkStudent(item.id, 'canceled')">
                   <v-icon color="red accent-4" small
                     >mdi-account-cancel-outline</v-icon
                   >
@@ -163,7 +163,7 @@ export default {
         { text: "Phone number", value: "phone_number" },
         { text: "Birthday", value: "birthday" },
         { text: "Region", value: "Region.title" },
-        { text: "Gender", value: "Gender.title" },
+        { text: "Gender", value: "gender" },
         { text: "Status", value: "status", class: "table-item" },
         { text: "Actions", value: "actions" },
       ],
@@ -193,21 +193,20 @@ export default {
   methods: {
     async init() {
       this.loading = true;
-      let dates = []
-      console.log(this.dates);
+      let dates = [];
       if (this.dates[1]) {
-        let checkDate = this.dateSort(this.dates[0], this.date[1]);
-        console.log(checkDate);
-        if (checkDate < 0) {
+        let checkDate = this.dateSort(this.dates[0], this.dates[1]);
+        if (checkDate > 0) {
           dates[0] = this.dates[1]
           dates[1] = this.dates[0]
+        }else{
+          dates = this.dates
         }
       }
-      console.log(dates);
       await this.$store.dispatch("student/fetchStudents", {status:this.status, dates, search: this.search, page: this.options.page});
       this.loading = false;
     },
-    async getStudents(pagination = 0) {
+    async getStudents() {
       await this.init();
     },
     createStudent() {
@@ -230,8 +229,19 @@ export default {
       this.$refs.create_update_student.show(student);
     },
     dateSort (date1, date2){
-      console.log('hello world ');
       return new Date(date1) - new Date(date2);
+    },
+    async checkStudent(id, status){
+      console.log(id);
+      let body = {id, status};
+      console.log(body);
+      try {
+        let response = await this.$store.dispatch('student/checkUser', body)
+        await this.init();
+        this.$toast.success(response.data.message);
+      } catch (error) {
+        this.$toast.error(error.response.data.message);
+      }
     }
   },
 };

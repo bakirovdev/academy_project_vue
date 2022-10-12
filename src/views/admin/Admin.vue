@@ -24,6 +24,9 @@
       </ul>
     </div>
     <div class="main-div">
+       <v-overlay v-model="$store.state.overlay">
+          <v-progress-circular :size="100" color="amber" indeterminate></v-progress-circular>
+        </v-overlay>
       <div>
         <router-view></router-view>
       </div>
@@ -44,7 +47,8 @@ export default {
         { id:2, title: "Students", icon: "mdi-account-group", to: "/admin/students"},
         { id:3, title: "Groups", icon: "mdi-layers-triple", to: "/admin/groups"},
         { id:4, title: "Setting", icon: "mdi-cog", to: "/admin/settings/"},
-        { id:5, title: "Logout", icon: "mdi-logout",to: "/login"}
+        { id:5, title: "Lessons", icon: "mdi-school", to: "/admin/lesson/group"},
+        { id:6, title: "Logout", icon: "mdi-logout",to: "/login"}
       ],
       mini: true,
     };
@@ -60,6 +64,9 @@ export default {
       sidebar.classList.toggle('close')
     },
     navigationAction(id, to_page){
+      if(to_page == '/login'){
+        localStorage.clear()
+      }
       let list_item = document.querySelectorAll('.list-item');
       // alert(list_item[id].classList.contains('active-list'))
       this.app_name = this.items[id].title;

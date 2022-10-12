@@ -58,7 +58,7 @@ const actions = {
     },
     async updateActive(context, id){
         try {
-            const response = await axios.patch(`/users/update_active/${id}`);
+            const response = await axios.put(`/users/update_active/${id}`);
             return Promise.resolve(response)
         } catch (error) {
             return Promise.reject(error)
