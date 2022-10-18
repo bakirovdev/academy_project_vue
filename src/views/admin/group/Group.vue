@@ -75,7 +75,7 @@
               icon
               class="pa-0 mx-2"
               color="green"
-              @click="groupStudents(item)"
+              @click="showGroupTeacher(item.GroupTeacher)"
             >
               <v-icon size="2rem">mdi-account-tie</v-icon>
             </v-btn>
@@ -101,6 +101,7 @@
       </v-dialog>
       <CreateUpdateGroup ref="create_update_group"/>
       <GroupStudentDialog ref="group_student"/>
+      <GroupTeacher ref="group_teacher" />
     </v-container>
   </v-container>
 </template>
@@ -108,9 +109,11 @@
 import {mapGetters} from 'vuex';
 import CreateUpdateGroup from './create-update-group.vue';
 import GroupStudentDialog from './group-student-dialog.vue';
+import GroupTeacher from  './teacher/teacher.vue'
+
 export default {
   name: "Group",
-  components: {CreateUpdateGroup, GroupStudentDialog},
+  components: {CreateUpdateGroup, GroupStudentDialog, GroupTeacher},
   data() {
     return {
       header: [
@@ -127,7 +130,7 @@ export default {
         {text: 'Active', value: 'active'},
         {text: 'Updated Time', value: 'updated_at'},
       ],
-      filter: {
+      filter: { 
         search: ''
       },
       dialog: false,
@@ -176,8 +179,11 @@ export default {
       }
       // this.times = item&&item.GroupLessonTime&&item.GroupLessonTime.map(element => element.Time) || [];
     },
-    groupStudents(item){
-      this.$refs.group_student.show(item)
+    showGroupTeacher($id){
+      this.$refs.group_teacher.show($id);
+    },
+    groupStudents(data){
+      this.$refs.group_student.show(data)
     }
   }
 };

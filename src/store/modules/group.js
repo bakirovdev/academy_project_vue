@@ -26,7 +26,7 @@ const actions = {
                     ...params
                 }
             })
-            commit('SET_GROUPS_DATA', { groups })
+            commit('SET_GROUPS_DATA', { groups:groups.data })
             return Promise.resolve(groups)    
         } catch (error) {
             return Promise.reject(error)
@@ -34,7 +34,7 @@ const actions = {
     },
     async userGroup({ commit }, params={}) {
         try {
-            const response = await axios.get('/groups/user', {
+            const response = await axios.get('/group/user', {
                 params: {
                     ...params
                 }

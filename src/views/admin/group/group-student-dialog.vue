@@ -149,7 +149,6 @@ export default {
       try {
         this.group = item
         await this.getStudents(item.id)
-        await this.getStudents(item.id);
         this.dialog = true;
       } catch (error) {
         console.log(error);
@@ -209,7 +208,7 @@ export default {
       try {
         await this.$store.dispatch('group_students/getUnJoinedStudent', { group_id: this.group.id, search: this.addDialogSearch })
       } catch (error) {
-
+        console.log(error);
       }
     },
     async chooseStudent(item) {
